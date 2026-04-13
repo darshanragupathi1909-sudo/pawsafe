@@ -29,7 +29,7 @@ nav a:hover{color:var(--rust)}
 .btn{display:inline-block;padding:1rem 2rem;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:500;border-radius:50px;transition:transform .2s;margin-right:1rem}
 .btn:hover{transform:translateY(-2px)}
 .btn.alt{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
-.hero-visual{aspect-ratio:1;background:radial-gradient(circle at 30% 30%,#8bc48f,var(--moss) 75%);border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;color:var(--paper)}.hero-visual svg{opacity:.9}
+.hero-visual{aspect-ratio:1;background:radial-gradient(circle at 30% 30%,#8bc48f,var(--moss) 75%);border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;color:#2a3025}.hero-visual svg{opacity:.85}
 .hero-visual::before{content:"";position:absolute;inset:-20px;border:1px dashed var(--moss);border-radius:50%;animation:spin 40s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;padding:4rem;max-width:1400px;margin:0 auto;border-top:1px solid rgba(0,0,0,.1);border-bottom:1px solid rgba(0,0,0,.1)}
@@ -54,7 +54,7 @@ html.dark body{background:var(--cream);color:var(--ink)}
 html.dark nav{background:#252b24;border-bottom-color:rgba(255,255,255,.1)}
 html.dark .card,html.dark .qcard,html.dark .board,html.dark .toc,html.dark .placeholder,html.dark .face.front{background:var(--paper);border-color:rgba(255,255,255,.1)}
 html.dark .opt,html.dark .pool,html.dark .bin,html.dark .score-row,html.dark .statement,html.dark .mf-btns button,html.dark .habit{background:#252b24;color:var(--ink)}
-html.dark .hero-visual{background:radial-gradient(circle at 30% 30%,#8bc48f,#45503b 75%)}
+html.dark .hero-visual{background:radial-gradient(circle at 30% 30%,#8bc48f,#45503b 75%);color:#f1e9da}
 html.dark .refs,html.dark .byline,html.dark .hero p,html.dark .intro,html.dark .feature p,html.dark .card p,html.dark .board>p{color:#b5b0a0}
 html.dark .alert{background:#45503b}
 
@@ -152,7 +152,7 @@ html.dark input,html.dark textarea,html.dark select{background:#1e2420;color:#f1
     <a href="/quiz" class="btn">Start the Q&amp;A →</a>
     <a href="/prevention" class="btn alt">Prevention Tips</a>
   </div>
-  <div class="hero-visual"><svg width="180" height="180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="10" r="2"/><circle cx="10" cy="5" r="2"/><circle cx="14" cy="5" r="2"/><circle cx="18" cy="10" r="2"/><path d="M8 16c0-3 2-5 4-5s4 2 4 5c0 2-1.5 3-4 3s-4-1-4-3z"/></svg></div>
+  <div class="hero-visual"><svg width="240" height="240" viewBox="0 0 200 200" fill="currentColor"><g transform="translate(10,15) rotate(-18 45 50)"><ellipse cx="15" cy="35" rx="10" ry="13" transform="rotate(-18 15 35)"/><ellipse cx="35" cy="18" rx="11" ry="14"/><ellipse cx="58" cy="18" rx="11" ry="14"/><ellipse cx="78" cy="35" rx="10" ry="13" transform="rotate(18 78 35)"/><path d="M 46 42 C 36 43, 28 50, 24 60 C 20 70, 24 78, 34 80 C 39 81, 43 79, 46 79 C 49 79, 53 81, 58 80 C 68 78, 72 70, 68 60 C 64 50, 56 43, 46 42 Z"/></g><g transform="translate(100,95) rotate(18 45 50)"><ellipse cx="15" cy="35" rx="10" ry="13" transform="rotate(-18 15 35)"/><ellipse cx="35" cy="18" rx="11" ry="14"/><ellipse cx="58" cy="18" rx="11" ry="14"/><ellipse cx="78" cy="35" rx="10" ry="13" transform="rotate(18 78 35)"/><path d="M 46 42 C 36 43, 28 50, 24 60 C 20 70, 24 78, 34 80 C 39 81, 43 79, 46 79 C 49 79, 53 81, 58 80 C 68 78, 72 70, 68 60 C 64 50, 56 43, 46 42 Z"/></g></svg></div>
 </section>
 
 <section class="stats">
