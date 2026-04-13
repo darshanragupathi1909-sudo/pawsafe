@@ -7,13 +7,13 @@
 <style>
 :root{--cream:#f1e9da;--ink:#2a3025;--rust:#63a46c;--moss:#45503b;--ochre:#d4a040;--paper:#f7f1e3}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;min-height:100vh;display:flex;flex-direction:column}
+html{scrollbar-gutter:stable}body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;min-height:100vh;display:flex;flex-direction:column}
 h1,h2{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-.02em}
-nav{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 4rem;border-bottom:1px solid rgba(26,26,26,.15);background:var(--paper);position:sticky;top:0;z-index:100}
+nav{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 2.5rem;flex-wrap:nowrap;border-bottom:1px solid rgba(26,26,26,.15);background:var(--paper);position:sticky;top:0;z-index:100}
 .logo{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:800}
 .logo span{color:var(--rust)}
-nav ul{display:flex;gap:2rem;list-style:none;align-items:center}
-nav a{color:var(--ink);text-decoration:none;font-size:.9rem;font-weight:500}
+nav ul{display:flex;gap:1.5rem;list-style:none;align-items:center;flex-wrap:nowrap}
+nav a{color:var(--ink);text-decoration:none;font-size:.85rem;font-weight:500;white-space:nowrap}
 nav a:hover{color:var(--rust)}
 .wrap{max-width:680px;margin:0 auto;padding:5rem 2rem;flex:1;width:100%;text-align:center}
 .label{font-size:.75rem;text-transform:uppercase;letter-spacing:.2em;color:var(--moss);margin-bottom:1rem}
