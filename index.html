@@ -62,7 +62,7 @@ html.dark .alert{background:#45503b}
 @keyframes paw-pulse{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}
 @keyframes paw-slide-down{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes paw-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-nav{animation:paw-slide-down .6s cubic-bezier(.2,.8,.3,1) both}
+
 .hero > div > *,.hero-head > *,.wrap > .label,.wrap > h1,.wrap > .intro,.wrap > .byline{animation:paw-fade-up .8s cubic-bezier(.2,.8,.3,1) both}
 .wrap > .label{animation-delay:.1s}
 .wrap > h1{animation-delay:.2s}
@@ -94,14 +94,14 @@ html{scroll-behavior:smooth}
 <nav>
   <div class="logo">Paw<span>Safe</span>.</div>
   <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="quiz.html">Q&amp;A</a></li>
-    <li><a href="prevention.html">Prevention</a></li>
-    <li><a href="games.html">Games</a></li>
-    <li><a href="article.html">Articles</a></li>
-    <li><a href="resources.html">Resources</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="/">Home</a></li>
+    <li><a href="/quiz">Q&amp;A</a></li>
+    <li><a href="/prevention">Prevention</a></li>
+    <li><a href="/games">Games</a></li>
+    <li><a href="/article">Articles</a></li>
+    <li><a href="/resources">Resources</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact">Contact</a></li>
     <li><button id="theme-btn" onclick="toggleTheme()" aria-label="Toggle dark mode" style="background:none;border:1.5px solid currentColor;color:inherit;width:34px;height:34px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button></li>
   </ul>
 </nav>
@@ -111,8 +111,8 @@ html{scroll-behavior:smooth}
     <span class="hero-tag">One Health Education</span>
     <h1>Healthy pets, <em>healthier</em> humans.</h1>
     <p>Zoonotic diseases pass from animals to people  -  but most are preventable with the right habits. Learn what every pet owner should know.</p>
-    <a href="quiz.html" class="btn">Start the Q&amp;A →</a>
-    <a href="prevention.html" class="btn alt">Prevention Tips</a>
+    <a href="/quiz" class="btn">Start the Q&amp;A →</a>
+    <a href="/prevention" class="btn alt">Prevention Tips</a>
   </div>
   <div class="hero-visual"><svg width="180" height="180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="10" r="2"/><circle cx="10" cy="5" r="2"/><circle cx="14" cy="5" r="2"/><circle cx="18" cy="10" r="2"/><path d="M8 16c0-3 2-5 4-5s4 2 4 5c0 2-1.5 3-4 3s-4-1-4-3z"/></svg></div>
 </section>
@@ -131,25 +131,25 @@ html{scroll-behavior:smooth}
       <div class="card-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
       <h3>Interactive Q&amp;A</h3>
       <p>Test your knowledge with scenario-based questions about everyday pet care risks.</p>
-      <a href="quiz.html">Take the quiz →</a>
+      <a href="/quiz">Take the quiz →</a>
     </div>
     <div class="card">
       <div class="card-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
       <h3>Prevention Toolkit</h3>
       <p>Tap interactive cards to reveal habits that protect your family and pets alike.</p>
-      <a href="prevention.html">Explore tips →</a>
+      <a href="/prevention">Explore tips →</a>
     </div>
     <div class="card">
       <div class="card-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><rect x="2" y="6" width="20" height="12" rx="2"/></svg></div>
       <h3>Learning Games</h3>
       <p>Drag-and-drop habit sorting and a timed Myth or Fact challenge to reinforce what you learned.</p>
-      <a href="games.html">Play now →</a>
+      <a href="/games">Play now →</a>
     </div>
     <div class="card">
       <div class="card-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
       <h3>In-Depth Article</h3>
       <p>Read the full feature on zoonotic disease, written for new and seasoned owners.</p>
-      <a href="article.html">Read article →</a>
+      <a href="/article">Read article →</a>
     </div>
   </div>
 </section>

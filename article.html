@@ -42,7 +42,7 @@ html.dark .pdf-frame,html.dark .note{background:var(--paper);border-color:rgba(2
 @keyframes paw-pulse{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}
 @keyframes paw-slide-down{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes paw-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-nav{animation:paw-slide-down .6s cubic-bezier(.2,.8,.3,1) both}
+
 .hero > div > *,.hero-head > *,.wrap > .label,.wrap > h1,.wrap > .intro,.wrap > .byline{animation:paw-fade-up .8s cubic-bezier(.2,.8,.3,1) both}
 .wrap > .label{animation-delay:.1s}
 .wrap > h1{animation-delay:.2s}
@@ -74,14 +74,14 @@ html{scroll-behavior:smooth}
 <nav>
   <div class="logo">Paw<span>Safe</span>.</div>
   <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="quiz.html">Q&amp;A</a></li>
-    <li><a href="prevention.html">Prevention</a></li>
-    <li><a href="games.html">Games</a></li>
-    <li><a href="article.html">Articles</a></li>
-    <li><a href="resources.html">Resources</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="/">Home</a></li>
+    <li><a href="/quiz">Q&amp;A</a></li>
+    <li><a href="/prevention">Prevention</a></li>
+    <li><a href="/games">Games</a></li>
+    <li><a href="/article">Articles</a></li>
+    <li><a href="/resources">Resources</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact">Contact</a></li>
     <li><button id="theme-btn" onclick="toggleTheme()" aria-label="Toggle dark mode" style="background:none;border:1.5px solid currentColor;color:inherit;width:34px;height:34px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button></li>
   </ul>
 </nav>
