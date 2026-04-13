@@ -307,10 +307,14 @@ function placeHabit(el,binType){
   if(correct)sortScore++;
   sortPlaced++;
   document.getElementById('sort-score').textContent=sortScore+' / 20';
-  if(sortPlaced===20){if(window.PawBadges)PawBadges.earn('sort');
+  if(sortPlaced===20){
     setTimeout(()=>{
-      const msg=sortScore===20?'Perfect sort':sortScore>=15?'Great job':'Keep practicing!';
-      alert('Game over  -  '+sortScore+'/10\n'+msg);
+      let title,msg;
+      if(sortScore===20){ title='Perfect sort!'; msg='All 20 habits placed correctly. Badge earned.'; if(window.PawBadges)PawBadges.earn('sort'); }
+      else if(sortScore>=17){ title='So close!'; msg='You are almost there. Reset and try for a perfect 20 to earn the badge.'; }
+      else if(sortScore>=12){ title='Good effort.'; msg='More than half right. Read the prevention page and give it another shot.'; }
+      else { title='Keep practicing.'; msg='This one takes time. Explore the prevention toolkit for hints and try again.'; }
+      alert('Game over: '+sortScore+'/20\n\n'+title+'\n'+msg);
     },400);
   }
 }
@@ -341,9 +345,14 @@ let mfIdx=0,mfScore=0,mfTimer=null,mfTimeLeft=10;
 function startMyth(){mfIdx=0;mfScore=0;renderMyth();}
 
 function renderMyth(){
-  if(mfIdx>=statements.length){if(window.PawBadges)PawBadges.earn('myth');
-    const msg=mfScore===statements.length?'Zoonotic pro':mfScore>=6?'Great work':'Review the Q&A page!';
-    document.getElementById('mf-game').innerHTML='<div class="mf-final"><div class="big-score">'+mfScore+'/'+statements.length+'</div><h3>'+msg+'</h3><button onclick="startMyth()" style="padding:1rem 2rem;background:var(--ink);color:var(--paper);border:none;border-radius:50px;font-family:inherit;cursor:pointer">Play Again</button></div>';
+  if(mfIdx>=statements.length){
+    const pct=mfScore/statements.length;
+    let title,msg,note;
+    if(pct===1){ title='Zoonotic pro!'; msg='A perfect run. You know your myths from your facts.'; note='Badge earned.'; if(window.PawBadges)PawBadges.earn('myth'); }
+    else if(pct>=.8){ title='So close!'; msg='One or two slipped by. Try again for the perfect badge.'; note='Perfect score required to earn the badge.'; }
+    else if(pct>=.5){ title='Good start.'; msg='Review the articles and take another swing.'; note='Perfect score required to earn the badge.'; }
+    else { title='Keep learning.'; msg='These myths are tricky. Explore the prevention toolkit and try again.'; note='Perfect score required to earn the badge.'; }
+    document.getElementById('mf-game').innerHTML='<div class="mf-final"><div class="big-score">'+mfScore+'/'+statements.length+'</div><h3>'+title+'</h3><p style="color:#666;margin-bottom:.8rem">'+msg+'</p><p style="font-size:.8rem;color:#888;margin-bottom:1.5rem">'+note+'</p><button onclick="startMyth()" style="padding:1rem 2rem;background:var(--ink);color:var(--paper);border:none;border-radius:50px;font-family:inherit;cursor:pointer">Play Again</button></div>';
     return;
   }
   mfTimeLeft=10;
@@ -467,8 +476,11 @@ function hzClick(i){
     const wrong=[...hzClicked].filter(k=>!hzItems[k].hazard).length;
     if(wrong===0&&window.PawBadges)PawBadges.earn('hazard');
     setTimeout(()=>{
-      const msg=wrong===0?'Perfect! You found all '+HZ_TOTAL+' hazards with no wrong clicks.':'You found all '+HZ_TOTAL+' hazards but clicked '+wrong+' safe items. Try again for a perfect score!';
-      alert(msg);
+      let title,msg;
+      if(wrong===0){ title='Perfect run!'; msg='All '+HZ_TOTAL+' hazards found with zero wrong clicks. Badge earned.'; }
+      else if(wrong<=2){ title='So close!'; msg='You found every hazard but clicked '+wrong+' safe item'+(wrong>1?'s':'')+'. Hit Reset and try for a perfect score.'; }
+      else { title='Good eye, but keep practicing.'; msg='You found every hazard but clicked '+wrong+' safe items by mistake. Review the prevention toolkit and try again.'; }
+      alert(title+'\n\n'+msg);
     },500);
   }
 }

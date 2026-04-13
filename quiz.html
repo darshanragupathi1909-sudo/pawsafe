@@ -159,8 +159,14 @@ let cur=0,score=0;
 const quiz=document.getElementById('quiz'),bar=document.getElementById('bar');
 
 function render(){
-  if(cur>=questions.length){if(window.PawBadges)PawBadges.earn('quiz');
-    quiz.innerHTML=`<div class="qcard results"><div class="score">${score}/${questions.length}</div><h2>${score===questions.length?'Perfect!':score>=4?'Well done!':'Keep learning!'}</h2><p>${score===questions.length?'You are a zoonotic prevention pro.':'Review the prevention page for more tips.'}</p><button onclick="cur=0;score=0;render()">Try Again</button></div>`;
+  if(cur>=questions.length){
+    const pct = score/questions.length;
+    let title, msg;
+    if(pct===1){ title='Perfect score!'; msg='You nailed every question. You are a zoonotic prevention pro.'; if(window.PawBadges)PawBadges.earn('quiz'); }
+    else if(pct>=.8){ title='So close!'; msg='Just one or two off. Review the prevention page and try again for a perfect badge.'; }
+    else if(pct>=.5){ title='You are almost there.'; msg='Halfway is a solid start. Read the articles and come back for another run.'; }
+    else { title='Keep learning.'; msg='This one takes practice. Check the prevention toolkit, then try again.'; }
+    quiz.innerHTML=`<div class="qcard results"><div class="score">${score}/${questions.length}</div><h2>${title}</h2><p>${msg}</p><p style="font-size:.8rem;color:#888;margin-top:.5rem">${pct===1?'Badge earned.':'Perfect score required to earn the badge.'}</p><button onclick="cur=0;score=0;render()">Try Again</button></div>`;
     bar.style.width='100%';return;
   }
   bar.style.width=((cur)/questions.length*100)+'%';
