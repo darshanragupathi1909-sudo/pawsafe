@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>(function(){try{if(localStorage.getItem('pawsafe-theme')==='dark')document.documentElement.classList.add('dark');}catch(e){}})();</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PawSafe  -  Zoonotic Disease Prevention</title>
@@ -87,6 +88,40 @@ html.dark .alert{background:#45503b}
 .progress-bar{transition:width .6s cubic-bezier(.2,.8,.3,1)!important}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+
+/* Dark mode button/text overrides */
+html.dark .btn{background:#f1e9da;color:#1e2420}
+html.dark .btn.alt{background:transparent;color:#f1e9da;border-color:#f1e9da}
+html.dark .opt{background:#1e2420;color:#f1e9da;border-color:transparent}
+html.dark .opt:hover{border-color:#8bb088}
+html.dark .opt.correct{background:#3d5a3a;color:#f1e9da;border-color:#63a46c}
+html.dark .opt.wrong{background:#5a3d2a;color:#f1e9da;border-color:#8b5a3c}
+html.dark .mf-btns button{background:#1e2420;color:#f1e9da;border-color:#f1e9da}
+html.dark .mf-btns button:hover:not(:disabled){background:#f1e9da;color:#1e2420}
+html.dark .mf-btns button.right{background:#3d5a3a;color:#f1e9da;border-color:#63a46c}
+html.dark .mf-btns button.wrongbtn{background:#5a3d2a;color:#f1e9da;border-color:#8b5a3c}
+html.dark .gtab,html.dark .tab{color:#f1e9da;border-color:#f1e9da}
+html.dark .gtab.active,html.dark .tab.active{background:#f1e9da;color:#1e2420}
+html.dark .habit{background:#1e2420;color:#f1e9da;border-color:#f1e9da}
+html.dark .habit.correct{background:#3d5a3a;border-color:#63a46c}
+html.dark .habit.wrong{background:#5a3d2a;border-color:#8b5a3c}
+html.dark .reset,html.dark .next-btn,html.dark .email-btn{background:#f1e9da;color:#1e2420}
+html.dark .hotline .num{color:#f1e9da}
+html.dark .questions li::before{color:#8bb088}
+html.dark .toc a{background:#1e2420;color:#f1e9da}
+html.dark .toc a:hover{border-color:#8bb088}
+html.dark .pool{background:#1e2420}
+html.dark .statement{background:#1e2420;color:#f1e9da}
+html.dark .mf-explain{background:#3d4a3a;color:#f1e9da}
+html.dark .case .lesson{background:#1e2420;color:#f1e9da}
+html.dark footer{background:#0f1210}
+html.dark .back .num,html.dark .results button{background:#f1e9da;color:#1e2420}
+html.dark .rcard a,html.dark .sources a,html.dark .card a{color:#8bb088}
+html.dark .hero-tag{background:#8bb088;color:#1e2420}
+html.dark h1 em,html.dark .logo span{color:#8bb088}
+html.dark .label{color:#8bb088}
+html.dark input,html.dark textarea,html.dark select{background:#1e2420;color:#f1e9da;border-color:#f1e9da}
 
 </style>
 </head>
