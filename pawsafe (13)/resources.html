@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resources - PawSafe</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#f1e9da;--ink:#2a3025;--rust:#63a46c;--moss:#45503b;--ochre:#d4a040;--paper:#f7f1e3}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7}
+h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-.02em}
+nav{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 4rem;border-bottom:1px solid rgba(26,26,26,.15);background:var(--paper);position:sticky;top:0;z-index:100}
+.logo{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:800}
+.logo span{color:var(--rust)}
+nav ul{display:flex;gap:2rem;list-style:none;align-items:center}
+nav a{color:var(--ink);text-decoration:none;font-size:.9rem;font-weight:500}
+nav a:hover{color:var(--rust)}
+.wrap{max-width:1100px;margin:0 auto;padding:4rem 2rem}
+.label{font-size:.75rem;text-transform:uppercase;letter-spacing:.2em;color:var(--moss);margin-bottom:1rem}
+h1{font-size:3.2rem;margin-bottom:1rem}
+h1 em{font-style:italic;color:var(--rust)}
+.intro{color:#555;font-size:1.1rem;max-width:600px;margin-bottom:3rem}
+.section{margin-bottom:4rem}
+.section-head{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;padding-bottom:.8rem;border-bottom:1px solid rgba(0,0,0,.12)}
+.section-head svg{color:var(--rust);flex-shrink:0}
+.section-head h2{font-size:1.8rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem}
+.rcard{background:var(--paper);padding:1.8rem;border-radius:16px;border:1px solid rgba(0,0,0,.08);transition:transform .2s}
+.rcard:hover{transform:translateY(-3px)}
+.rcard h3{font-size:1.15rem;margin-bottom:.5rem}
+.rcard p{color:#666;font-size:.9rem;margin-bottom:1rem}
+.rcard a{color:var(--rust);text-decoration:none;font-weight:600;font-size:.85rem}
+.hotline{background:var(--moss);color:var(--paper);padding:1.5rem;border-radius:12px;display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem}
+.hotline h4{font-family:'Fraunces',serif;font-size:1.05rem;margin-bottom:.2rem}
+.hotline p{font-size:.8rem;opacity:.85}
+.hotline .num{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;color:var(--cream)}
+.questions{background:var(--paper);padding:2rem;border-radius:16px;border:1px solid rgba(0,0,0,.08)}
+.questions ol{list-style:none;counter-reset:q}
+.questions li{counter-increment:q;padding:1rem 0 1rem 3rem;position:relative;border-bottom:1px solid rgba(0,0,0,.08)}
+.questions li:last-child{border-bottom:none}
+.questions li::before{content:counter(q,decimal-leading-zero);position:absolute;left:0;top:1rem;font-family:'Fraunces',serif;font-weight:700;color:var(--rust);font-size:1rem}
+.case{background:var(--paper);padding:2rem;border-radius:16px;border:1px solid rgba(0,0,0,.08);margin-bottom:1.2rem;border-left:4px solid var(--rust)}
+.case h3{font-size:1.25rem;margin-bottom:.8rem}
+.case .loc{font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--moss);margin-bottom:.8rem;font-weight:600}
+.case p{font-size:.95rem;color:#3a3a33;margin-bottom:.8rem}
+.case .lesson{background:var(--cream);padding:1rem;border-radius:10px;font-size:.9rem;margin-top:1rem}
+.case .lesson strong{font-family:'Fraunces',serif;color:var(--moss)}
+@media(max-width:700px){nav{padding:1rem 1.5rem;flex-direction:column;gap:.8rem}nav ul{gap:1rem;flex-wrap:wrap;justify-content:center}.wrap{padding:2rem 1rem}h1{font-size:2.2rem}.hotline{flex-direction:column;text-align:center;gap:.5rem}}
+
+html.dark{--cream:#1e2420;--ink:#f1e9da;--paper:#2a3025;--moss:#8bb088}
+html.dark body{background:var(--cream);color:var(--ink)}
+html.dark nav{background:#252b24;border-bottom-color:rgba(255,255,255,.1)}
+html.dark .rcard,html.dark .questions,html.dark .case{background:var(--paper);border-color:rgba(255,255,255,.1)}
+html.dark .intro,html.dark .rcard p,html.dark .case p{color:#b5b0a0}
+html.dark .case .lesson{background:#1e2420}
+html.dark .hotline{background:#3d4a3a}
+
+/* === PAGE LOAD ANIMATIONS === */
+@keyframes paw-fade-up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes paw-fade-in{from{opacity:0}to{opacity:1}}
+@keyframes paw-pulse{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}
+@keyframes paw-slide-down{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes paw-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+nav{animation:paw-slide-down .6s cubic-bezier(.2,.8,.3,1) both}
+.hero > div > *,.hero-head > *,.wrap > .label,.wrap > h1,.wrap > .intro,.wrap > .byline{animation:paw-fade-up .8s cubic-bezier(.2,.8,.3,1) both}
+.wrap > .label{animation-delay:.1s}
+.wrap > h1{animation-delay:.2s}
+.wrap > .byline,.wrap > .intro{animation-delay:.3s}
+.hero > div > .hero-tag{animation-delay:.15s}
+.hero > div > h1{animation-delay:.25s}
+.hero > div > p{animation-delay:.35s}
+.hero > div > .btn{animation-delay:.45s}
+.hero-visual{animation:paw-fade-in 1s ease-out .5s both}
+.paw-reveal{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.2,.8,.3,1),transform .7s cubic-bezier(.2,.8,.3,1)}
+.paw-reveal.in{opacity:1;transform:translateY(0)}
+.card,.rcard,.aud,.badge,.qcard,.case,.hotline,.questions,.stat,.board,.toc a{transition:transform .35s cubic-bezier(.2,.8,.3,1),box-shadow .35s ease,border-color .35s ease}
+.card:hover,.rcard:hover{box-shadow:0 12px 30px rgba(0,0,0,.1)}
+.stat:hover h2{transform:scale(1.05)}
+.stat h2{transition:transform .35s cubic-bezier(.2,.8,.3,1);display:inline-block}
+.btn,.email-btn,.gtab,.tab,.reset,.mf-btns button,.next-btn,.opt{transition:transform .2s cubic-bezier(.2,.8,.3,1),background .25s ease,color .25s ease,border-color .25s ease,box-shadow .25s ease}
+.btn:hover,.email-btn:hover{box-shadow:0 6px 20px rgba(0,0,0,.15)}
+.btn:active,.email-btn:active,.gtab:active,.mf-btns button:active{transform:scale(.97)}
+.card .inner,#flashcard > div{transition:transform .7s cubic-bezier(.4,0,.2,1)}
+.opt.correct{animation:paw-pulse .5s ease-out}
+.opt.wrong{animation:paw-shake .4s ease-out}
+.progress-bar{transition:width .6s cubic-bezier(.2,.8,.3,1)!important}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Paw<span>Safe</span>.</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="quiz.html">Q&amp;A</a></li>
+    <li><a href="prevention.html">Prevention</a></li>
+    <li><a href="games.html">Games</a></li>
+    <li><a href="article.html">Articles</a></li>
+    <li><a href="resources.html">Resources</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><button id="theme-btn" onclick="toggleTheme()" aria-label="Toggle dark mode" style="background:none;border:1.5px solid currentColor;color:inherit;width:34px;height:34px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button></li>
+  </ul>
+</nav>
+
+<div class="wrap">
+  <p class="label">- For Owners, Teachers &amp; Clinics</p>
+  <h1>PawSafe <em>Resources</em>.</h1>
+  <p class="intro">Where to find help, how to teach with this site, and real stories that show why prevention matters.</p>
+
+  <section class="section">
+    <div class="section-head">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>
+      <h2>Find Professional Help</h2>
+    </div>
+    <div class="cards">
+      <div class="rcard"><h3>AVMA Vet Finder</h3><p>Search the American Veterinary Medical Association directory for accredited veterinarians near you.</p><a href="https://www.avma.org/resources-tools/pet-owners/petcare/how-find-veterinarian" target="_blank">Open directory</a></div>
+      <div class="rcard"><h3>CDC Healthy Pets</h3><p>Official federal resource on zoonotic diseases, outbreaks, and prevention guidance by pet type.</p><a href="https://www.cdc.gov/healthy-pets/" target="_blank">Visit CDC page</a></div>
+      <div class="rcard"><h3>ASPCA Poison Control</h3><p>24/7 hotline for suspected pet poisoning, including from household chemicals and foods.</p><a href="https://www.aspca.org/pet-care/animal-poison-control" target="_blank">View resources</a></div>
+      <div class="rcard"><h3>WHO Zoonoses Hub</h3><p>Global perspective on zoonotic disease, useful for research papers and classroom context.</p><a href="https://www.who.int/health-topics/zoonoses" target="_blank">Visit WHO page</a></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <h2>Emergency Hotlines</h2>
+    </div>
+    <div class="hotline"><div><h4>ASPCA Animal Poison Control</h4><p>24/7, consultation fee may apply</p></div><div class="num">(888) 426-4435</div></div>
+    <div class="hotline"><div><h4>Pet Poison Helpline</h4><p>24/7, per-incident fee</p></div><div class="num">(855) 764-7661</div></div>
+    <div class="hotline"><div><h4>CDC-INFO (general disease questions)</h4><p>Monday - Friday, 8 AM - 8 PM ET</p></div><div class="num">(800) 232-4636</div></div>
+    <div class="hotline"><div><h4>Rabies exposure: your local health department</h4><p>Call immediately after any bite from a wild or unvaccinated animal</p></div><div class="num">911 if urgent</div></div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      <h2>Teacher's Corner: Discussion Starters</h2>
+    </div>
+    <p style="color:#666;margin-bottom:1.2rem;font-size:.95rem">Ten ready-to-use questions to spark classroom discussion after students explore the site.</p>
+    <div class="questions">
+      <ol>
+        <li>Why do you think some zoonotic diseases (like toxoplasmosis) mostly come from food instead of pets, even though cats are involved in the life cycle?</li>
+        <li>If 30% of cats carry Bartonella but show no signs, how should that change the way we interact with all cats, not just sick ones?</li>
+        <li>The sale of small turtles has been banned in the U.S. since 1975. Do you think that rule should still apply today? Why or why not?</li>
+        <li>Why are children under 5, pregnant people, and those with weakened immune systems considered high-risk groups? What does that tell us about public health policy?</li>
+        <li>Compare how rabies and leptospirosis spread. Why is vaccination so effective for both, and what does that teach us about disease prevention in general?</li>
+        <li>Why might a pet owner resist the advice to stop feeding raw meat diets? How would you address their concerns while keeping them informed?</li>
+        <li>What is the "One Health" concept, and how does zoonotic disease prevention connect animal, human, and environmental health?</li>
+        <li>If a family member is pregnant, what changes should a household make around their cat? Who should make those decisions, and how?</li>
+        <li>Birds, reptiles, and rodents each carry different risks. If a classroom were choosing a class pet, which animal would be safest and why?</li>
+        <li>Imagine you are a veterinarian giving a 30-second warning to a new puppy owner. What would you say, and why those specific tips?</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      <h2>Real Case Studies</h2>
+    </div>
+    <p style="color:#666;margin-bottom:1.2rem;font-size:.95rem">Composite stories based on documented cases. Names and identifying details changed.</p>
+
+    <div class="case">
+      <p class="loc">Texas, U.S.</p>
+      <h3>A pet turtle and a toddler's Salmonella infection</h3>
+      <p>A family adopted a small red-eared slider turtle for their 4-year-old. Within two weeks, the child developed severe diarrhea and fever. Lab tests traced the infection to the turtle's tank water, which the child had touched during play.</p>
+      <p>The child recovered after hospitalization, but the pediatrician explained that children under 5 should not handle reptiles because their immune systems are still developing and they often put their hands in their mouths.</p>
+      <div class="lesson"><strong>Lesson:</strong> Reptiles naturally carry Salmonella on their skin even when healthy. The CDC recommends no reptile pets in homes with children under 5. Handwashing after any tank contact is non-negotiable.</div>
+    </div>
+
+    <div class="case">
+      <p class="loc">Ohio, U.S.</p>
+      <h3>A hiking trip, a puddle, and leptospirosis</h3>
+      <p>A golden retriever named Duke drank from a stagnant pond during a weekend hike. Three days later he was vomiting and lethargic. His owners assumed it was a stomach bug and waited. By day five, Duke was hospitalized with kidney failure from leptospirosis. He survived after intensive treatment, but his owner developed mild flu-like symptoms the following week.</p>
+      <div class="lesson"><strong>Lesson:</strong> Leptospirosis symptoms can appear in dogs within 48 hours. A yearly lepto vaccine would have prevented this case entirely. If your dog seems sick after exposure to standing water, do not wait.</div>
+    </div>
+
+    <div class="case">
+      <p class="loc">California, U.S.</p>
+      <h3>A rescue kitten and ringworm that spread to a family</h3>
+      <p>The Patel family adopted a stray kitten they found in their backyard. The kitten looked healthy, but within three weeks, their 8-year-old daughter developed a circular, itchy rash on her arm. Then their other cat got it. Then the father. A vet confirmed ringworm in the kitten, who had been an asymptomatic carrier.</p>
+      <p>The family had to deep-clean all bedding, disinfect furniture with diluted bleach, and treat every family member and both cats simultaneously to stop the cycle.</p>
+      <div class="lesson"><strong>Lesson:</strong> Always take newly adopted pets, especially strays, to a vet for a health check before introducing them to your household. Ringworm spores live for months on fabric.</div>
+    </div>
+
+    <div class="case">
+      <p class="loc">New York, U.S.</p>
+      <h3>The bat in the bedroom</h3>
+      <p>A woman woke up to find a bat flying in her bedroom. She shooed it out the window and went back to sleep. The next day, a neighbor told her bats can bite while people sleep without leaving a visible mark. She called her doctor, who recommended post-exposure rabies shots as a precaution. Because she sought treatment immediately, she never developed symptoms.</p>
+      <div class="lesson"><strong>Lesson:</strong> Any bat contact during sleep is treated as a possible rabies exposure, even without a visible bite. Post-exposure treatment is highly effective if started before symptoms appear. Once neurological symptoms develop, rabies is almost always fatal.</div>
+    </div>
+  </section>
+
+</div>
+<script src="shared.js"></script>
+</body>
+</html>
