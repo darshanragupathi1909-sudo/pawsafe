@@ -121,10 +121,11 @@ html.dark .label{color:#8bb088}
 html.dark input,html.dark textarea,html.dark select{background:#1e2420;color:#f1e9da;border-color:#f1e9da}
 
 
+
+h1,h2,h3,h4,p,a,li,.card,.face,.qtext,.statement,.rcard,.habit,.opt{overflow-wrap:break-word;word-wrap:break-word}
 /* === RESPONSIVE POLISH === */
 /* Ensure content never overflows */
-*,*::before,*::after{max-width:100%}
-img,svg,video,iframe{max-width:100%;height:auto}
+img,video,iframe{max-width:100%;height:auto}
 body{-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:hidden}
 
 /* Wrap should breathe on all sizes */
@@ -183,7 +184,13 @@ body{-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:hidden}
   .statement p{font-size:1.1rem !important}
   .mf-btns button{padding:1rem;font-size:1.1rem}
   .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr)) !important;gap:1rem}
-  .card{aspect-ratio:auto;min-height:220px}
+  .grid{grid-template-columns:1fr !important;gap:1rem}
+  .card{aspect-ratio:auto;min-height:220px;height:auto}
+  .card .inner{height:260px}
+  .face{padding:1.4rem;word-wrap:break-word;overflow-wrap:break-word}
+  .back p{font-size:.88rem;line-height:1.5}
+  .front h3{font-size:1.25rem}
+  .back h4{font-size:1.1rem}
   .alert{grid-template-columns:1fr !important;text-align:center;gap:1rem;padding:1.5rem}
   .hotline{flex-direction:column;text-align:center;gap:.5rem;padding:1.2rem}
   .questions{padding:1.2rem}

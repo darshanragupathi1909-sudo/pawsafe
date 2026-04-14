@@ -29,7 +29,7 @@ nav a:hover{color:var(--rust)}
 .btn{display:inline-block;padding:1rem 2rem;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:500;border-radius:50px;transition:transform .2s;margin-right:1rem}
 .btn:hover{transform:translateY(-2px)}
 .btn.alt{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
-.hero-visual{aspect-ratio:1;background:radial-gradient(circle at 30% 30%,#8bc48f,var(--moss) 75%);border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;color:#2a3025}.hero-visual svg{opacity:.85}
+.hero-visual{aspect-ratio:1;background:radial-gradient(circle at 30% 30%,#8bc48f,var(--moss) 75%);border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;color:#2a3025;width:100%;max-width:440px}.hero-visual svg{opacity:.85;width:70%;height:70%;max-width:none}
 .hero-visual::before{content:"";position:absolute;inset:-20px;border:1px dashed var(--moss);border-radius:50%;animation:spin 40s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;padding:4rem;max-width:1400px;margin:0 auto;border-top:1px solid rgba(0,0,0,.1);border-bottom:1px solid rgba(0,0,0,.1)}
@@ -124,10 +124,11 @@ html.dark .label{color:#8bb088}
 html.dark input,html.dark textarea,html.dark select{background:#1e2420;color:#f1e9da;border-color:#f1e9da}
 
 
+
+h1,h2,h3,h4,p,a,li,.card,.face,.qtext,.statement,.rcard,.habit,.opt{overflow-wrap:break-word;word-wrap:break-word}
 /* === RESPONSIVE POLISH === */
 /* Ensure content never overflows */
-*,*::before,*::after{max-width:100%}
-img,svg,video,iframe{max-width:100%;height:auto}
+img,video,iframe{max-width:100%;height:auto}
 body{-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:hidden}
 
 /* Wrap should breathe on all sizes */
