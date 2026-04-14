@@ -124,10 +124,32 @@ html{scroll-behavior:smooth}
         data-reactions-enabled="1"
         data-emit-metadata="0"
         data-input-position="bottom"
-        data-theme="preferred_color_scheme"
+        data-theme="light"
         data-lang="en"
         crossorigin="anonymous"
         async>
+</script>
+<script>
+// Sync Giscus theme with site theme
+(function(){
+  function currentGiscusTheme(){return document.documentElement.classList.contains('dark')?'dark':'light';}
+  function setGiscusTheme(t){
+    const frame=document.querySelector('iframe.giscus-frame');
+    if(frame)frame.contentWindow.postMessage({giscus:{setConfig:{theme:t}}},'https://giscus.app');
+  }
+  // Set on load once Giscus iframe exists
+  const obs=new MutationObserver(()=>{
+    if(document.querySelector('iframe.giscus-frame')){setGiscusTheme(currentGiscusTheme());}
+  });
+  obs.observe(document.body,{childList:true,subtree:true});
+  // Intercept toggleTheme to update Giscus too
+  const origToggle=window.toggleTheme;
+  window.toggleTheme=function(){
+    if(origToggle)origToggle();
+    else{document.documentElement.classList.toggle('dark');localStorage.setItem('pawsafe-theme',document.documentElement.classList.contains('dark')?'dark':'light');}
+    setGiscusTheme(currentGiscusTheme());
+  };
+})();
 </script>
 
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>

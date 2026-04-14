@@ -178,6 +178,7 @@ html.dark input,html.dark textarea,html.dark select{background:#1e2420;color:#f1
     <button class="gtab" data-g="myth">Myth or Fact</button>
     <button class="gtab" data-g="hazard">Spot the Hazard</button>
     <button class="gtab" data-g="flash">Flashcards</button>
+    <button class="gtab" data-g="clinic">Vet Clinic</button>
   </div>
 
   <!-- SORT THE HABITS -->
@@ -230,6 +231,27 @@ html.dark input,html.dark textarea,html.dark select{background:#1e2420;color:#f1
         <button onclick="fcPrev()" style="padding:.8rem 1.8rem;background:transparent;color:var(--ink);border:1.5px solid var(--ink);border-radius:50px;font-family:inherit;cursor:pointer">&larr; Previous</button>
         <button onclick="fcNext()" style="padding:.8rem 1.8rem;background:var(--ink);color:var(--paper);border:none;border-radius:50px;font-family:inherit;cursor:pointer">Next &rarr;</button>
       </div>
+    </div>
+  </div>
+
+  <!-- VET CLINIC TYCOON -->
+  <div class="panel" id="p-clinic">
+    <div class="board">
+      <h2>Vet Clinic Tycoon</h2>
+      <p>Pets walk into your clinic with a label showing why they came in. Click the ones with <strong>real zoonotic diseases</strong> to treat them. Leave the ones with <strong>harmless reasons</strong> alone - treating them wastes resources and causes stress! Reach $1,000 to earn the badge.</p>
+      <div class="score-row" style="display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;text-align:center">
+        <div><span style="display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--moss)">Money</span><span class="big" id="vc-money" style="color:var(--rust)">$100</span></div>
+        <div><span style="display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--moss)">Treated</span><span class="big" id="vc-treated">0</span></div>
+        <div><span style="display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--moss)">Mistakes</span><span class="big" id="vc-mistakes">0</span></div>
+        <div><span style="display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--moss)">Time</span><span class="big" id="vc-time">60</span></div>
+      </div>
+      <div id="vc-scene" style="position:relative;width:100%;height:320px;background:linear-gradient(180deg,#e8dcc0 0%,#e8dcc0 60%,#b89a6e 60%,#a88a5e 100%);border-radius:14px;overflow:hidden;border:2px solid var(--ink);margin-bottom:1rem;cursor:crosshair">
+        <div style="position:absolute;top:8px;left:12px;font-size:.7rem;font-family:'Fraunces',serif;font-weight:600;color:var(--moss);background:rgba(247,241,227,.85);padding:.2rem .6rem;border-radius:6px">PawSafe Veterinary Clinic</div>
+      </div>
+      <div id="vc-controls" style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap">
+        <button onclick="vcStart()" style="padding:.9rem 2rem;background:var(--ink);color:var(--paper);border:none;border-radius:50px;font-family:inherit;cursor:pointer;font-weight:500" id="vc-start-btn">Start Shift</button>
+      </div>
+      <div id="vc-feedback" style="margin-top:1rem;padding:1rem;border-radius:12px;display:none;font-size:.9rem"></div>
     </div>
   </div>
 
@@ -524,6 +546,234 @@ function renderFlash(){
 }
 function fcNext(){fcFlipped=false;fcIdx=(fcIdx+1)%flashcards.length;renderFlash();}
 function fcPrev(){fcFlipped=false;fcIdx=(fcIdx-1+flashcards.length)%flashcards.length;renderFlash();}
+
+/* ---------- VET CLINIC TYCOON ---------- */
+// Real zoonotic diseases - ONLY from the PawSafe article guide - player SHOULD treat these
+const VC_SICK_LIST = [
+  {name:"Rabies exposure",why:"Viral infection from a mammal bite. Almost always fatal once symptoms appear. Post-exposure shots must be given before symptoms start."},
+  {name:"Leptospirosis",why:"Bacterial infection from contaminated water and soil. Can cause kidney or liver failure in dogs and flu-like illness in humans."},
+  {name:"Ringworm",why:"Fungal skin infection (not a worm) that spreads to humans on contact. Needs antifungal treatment and isolation."},
+  {name:"Toxoplasmosis",why:"Parasite that reproduces in cats and is dangerous during pregnancy. Needs treatment plus strict litter hygiene."},
+  {name:"Cat scratch fever",why:"Bartonella bacteria from flea dirt under a cat's claws. About 30 percent of cats carry it. Flea prevention is key."},
+  {name:"Salmonella (dog)",why:"Bacterial gut infection, often from raw meat diets. Pets can be silent carriers and shed it to humans through feces and saliva."},
+  {name:"Salmonella (cat)",why:"Cats can carry Salmonella without symptoms, especially those on raw diets. Contagious to humans through contact with feces."},
+  {name:"Campylobacter",why:"Bacterial infection common in puppies and kittens under 6 months. One of the top causes of diarrhea in humans worldwide."},
+  {name:"Reptile Salmonella",why:"Almost all reptiles naturally shed Salmonella. About 6 percent of U.S. Salmonella cases come from reptile contact."},
+  {name:"Psittacosis",why:"Parrot fever from Chlamydia psittaci in bird droppings. Can cause pneumonia in humans. Needs antibiotic treatment."},
+  {name:"LCM virus",why:"Lymphocytic choriomeningitis virus, often from rodent pets. Dangerous for pregnant people and immunocompromised individuals."}
+];
+// Harmless reasons - player should NOT treat these
+const VC_HEALTHY_LIST = [
+  {name:"Annual checkup",why:"Routine wellness exams do not require treatment. Let this pet finish their visit and go home."},
+  {name:"Nail trim",why:"A grooming service, not a medical treatment. Treating for disease would be unnecessary and stressful."},
+  {name:"Vaccine booster",why:"Already scheduled with the nurse. Do not treat them as sick - they are here for preventive care."},
+  {name:"Microchip appointment",why:"A quick ID procedure, not a treatment. Save your efforts for actually sick patients."},
+  {name:"Weight check",why:"Routine monitoring for a healthy pet on a diet plan. No treatment needed."},
+  {name:"Dental cleaning",why:"Scheduled cleaning by the hygienist, not a disease. Treating them is unnecessary."},
+  {name:"Adoption paperwork",why:"A new owner is completing adoption forms. The pet is perfectly healthy."},
+  {name:"Just curious!",why:"This pet wandered in with their owner during another visit. Nothing wrong with them at all."},
+  {name:"Nervous visitor",why:"A pet that is scared of the vet but not sick. Anxiety is not a zoonotic disease."},
+  {name:"Grooming only",why:"Here for a bath and haircut, not medical care. Leave them to the groomer."}
+];
+// SVG pet templates - sized ~50x50 viewBox, will be inline-sized in DOM
+const VC_PETS = {
+  dog: '<svg viewBox="0 0 60 50" width="70" height="58"><ellipse cx="30" cy="38" rx="18" ry="8" fill="#8b6f47"/><ellipse cx="30" cy="28" rx="14" ry="12" fill="#a07d52"/><circle cx="30" cy="18" r="10" fill="#a07d52"/><ellipse cx="22" cy="12" rx="4" ry="6" fill="#8b6f47"/><ellipse cx="38" cy="12" rx="4" ry="6" fill="#8b6f47"/><circle cx="26" cy="18" r="1.8" fill="#2a1810"/><circle cx="34" cy="18" r="1.8" fill="#2a1810"/><ellipse cx="30" cy="23" rx="2" ry="1.5" fill="#2a1810"/><path d="M28 25 Q30 27 32 25" stroke="#2a1810" stroke-width="1" fill="none" stroke-linecap="round"/><line x1="20" y1="42" x2="20" y2="48" stroke="#8b6f47" stroke-width="3" stroke-linecap="round"/><line x1="26" y1="44" x2="26" y2="48" stroke="#8b6f47" stroke-width="3" stroke-linecap="round"/><line x1="34" y1="44" x2="34" y2="48" stroke="#8b6f47" stroke-width="3" stroke-linecap="round"/><line x1="40" y1="42" x2="40" y2="48" stroke="#8b6f47" stroke-width="3" stroke-linecap="round"/></svg>',
+  cat: '<svg viewBox="0 0 60 50" width="68" height="56"><ellipse cx="30" cy="38" rx="16" ry="7" fill="#d4a574"/><ellipse cx="30" cy="28" rx="12" ry="11" fill="#e6b885"/><circle cx="30" cy="18" r="9" fill="#e6b885"/><path d="M20 12 L23 5 L26 12 Z" fill="#d4a574"/><path d="M34 12 L37 5 L40 12 Z" fill="#d4a574"/><circle cx="26" cy="18" r="1.8" fill="#2a1810"/><circle cx="34" cy="18" r="1.8" fill="#2a1810"/><path d="M28 22 L30 24 L32 22" stroke="#2a1810" stroke-width="1.2" fill="none" stroke-linecap="round"/><line x1="22" y1="19" x2="16" y2="18" stroke="#2a1810" stroke-width=".7"/><line x1="22" y1="20" x2="16" y2="21" stroke="#2a1810" stroke-width=".7"/><line x1="38" y1="19" x2="44" y2="18" stroke="#2a1810" stroke-width=".7"/><line x1="38" y1="20" x2="44" y2="21" stroke="#2a1810" stroke-width=".7"/><line x1="22" y1="42" x2="22" y2="48" stroke="#d4a574" stroke-width="3" stroke-linecap="round"/><line x1="28" y1="44" x2="28" y2="48" stroke="#d4a574" stroke-width="3" stroke-linecap="round"/><line x1="34" y1="44" x2="34" y2="48" stroke="#d4a574" stroke-width="3" stroke-linecap="round"/><line x1="40" y1="42" x2="40" y2="48" stroke="#d4a574" stroke-width="3" stroke-linecap="round"/><path d="M44 34 Q50 30 48 26" stroke="#d4a574" stroke-width="3" fill="none" stroke-linecap="round"/></svg>',
+  rabbit: '<svg viewBox="0 0 60 50" width="64" height="54"><ellipse cx="30" cy="38" rx="14" ry="7" fill="#c8b89a"/><ellipse cx="30" cy="28" rx="11" ry="10" fill="#e0d0b0"/><circle cx="30" cy="18" r="8" fill="#e0d0b0"/><ellipse cx="25" cy="8" rx="2.5" ry="7" fill="#c8b89a"/><ellipse cx="35" cy="8" rx="2.5" ry="7" fill="#c8b89a"/><ellipse cx="25" cy="8" rx="1.2" ry="5" fill="#f5d5d0"/><ellipse cx="35" cy="8" rx="1.2" ry="5" fill="#f5d5d0"/><circle cx="27" cy="18" r="1.5" fill="#2a1810"/><circle cx="33" cy="18" r="1.5" fill="#2a1810"/><ellipse cx="30" cy="22" rx="1.5" ry="1" fill="#e89090"/></svg>'
+};
+// Status icons
+const VC_SICK = '<svg width="24" height="24" viewBox="0 0 24 24" fill="#c44a3a" stroke="#fff" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4" fill="none"/><line x1="12" y1="2" x2="12" y2="5" stroke="#c44a3a"/><line x1="12" y1="19" x2="12" y2="22" stroke="#c44a3a"/><line x1="2" y1="12" x2="5" y2="12" stroke="#c44a3a"/><line x1="19" y1="12" x2="22" y2="12" stroke="#c44a3a"/><line x1="5" y1="5" x2="7" y2="7" stroke="#c44a3a"/><line x1="17" y1="17" x2="19" y2="19" stroke="#c44a3a"/><line x1="19" y1="5" x2="17" y2="7" stroke="#c44a3a"/><line x1="7" y1="17" x2="5" y2="19" stroke="#c44a3a"/></svg>';
+const VC_HEALTHY = '<svg width="24" height="24" viewBox="0 0 24 24" fill="#63a46c" stroke="#fff" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M7 12l3 3 7-7" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+let vcPets=[],vcMoney=100,vcTreated=0,vcMistakes=0,vcTime=60,vcTimer=null,vcSpawnTimer=null,vcMoveTimer=null,vcRunning=false,vcNextId=0;
+
+function vcStart(){
+  if(vcRunning)return;
+  vcMoney=100;vcTreated=0;vcMistakes=0;vcTime=60;vcPets=[];vcRunning=true;vcNextId=0;
+  const scene=document.getElementById('vc-scene');
+  // Clear any pets from previous round
+  scene.querySelectorAll('.vc-pet, .vc-popup').forEach(el=>el.remove());
+  document.getElementById('vc-start-btn').textContent='Running...';
+  document.getElementById('vc-start-btn').disabled=true;
+  vcUpdateHUD();
+  document.getElementById('vc-feedback').style.display='none';
+
+  // Countdown timer
+  vcTimer=setInterval(()=>{
+    vcTime--;
+    vcUpdateHUD();
+    if(vcTime<=0)vcEnd();
+  },1000);
+
+  // Spawn pets - faster over time
+  function scheduleSpawn(){
+    if(!vcRunning)return;
+    vcSpawnPet();
+    const elapsed=60-vcTime;
+    const interval=Math.max(900, 2200 - elapsed*25); // speeds up over 60s
+    vcSpawnTimer=setTimeout(scheduleSpawn, interval);
+  }
+  scheduleSpawn();
+
+  // Movement loop
+  vcMoveTimer=setInterval(vcTick, 40);
+}
+
+function vcSpawnPet(){
+  const scene=document.getElementById('vc-scene');
+  if(!scene)return;
+  const types=['dog','cat','rabbit'];
+  const type=types[Math.floor(Math.random()*types.length)];
+  // 55% chance sick, 45% healthy - mix keeps it interesting
+  const isSick=Math.random()<0.55;
+  const pool=isSick?VC_SICK_LIST:VC_HEALTHY_LIST;
+  const condition=pool[Math.floor(Math.random()*pool.length)];
+  const id='vcp-'+(vcNextId++);
+  const el=document.createElement('div');
+  el.className='vc-pet';
+  el.id=id;
+  el.dataset.sick=isSick?'1':'0';
+  el.style.cssText='position:absolute;bottom:15px;right:-100px;cursor:pointer;transition:transform .15s;user-select:none;z-index:5;display:flex;flex-direction:column;align-items:center';
+  const labelBg=isSick?'#c44a3a':'#63a46c';
+  el.innerHTML='<div style="background:'+labelBg+';color:#fff;font-size:.65rem;font-weight:700;padding:.25rem .55rem;border-radius:50px;white-space:nowrap;margin-bottom:2px;box-shadow:0 2px 6px rgba(0,0,0,.25);font-family:Inter,sans-serif;max-width:140px;text-align:center;text-transform:uppercase;letter-spacing:.03em">'+condition.name+'</div>'+VC_PETS[type];
+  el.onclick=(e)=>{e.stopPropagation();vcClickPet(id);};
+  el.onmouseenter=()=>el.style.transform='translateY(-4px)';
+  el.onmouseleave=()=>el.style.transform='';
+  scene.appendChild(el);
+  vcPets.push({id,x:scene.offsetWidth,sick:isSick,speed:0.8+Math.random()*0.4,handled:false,condition});
+}
+
+function vcTick(){
+  if(!vcRunning)return;
+  const scene=document.getElementById('vc-scene');
+  if(!scene)return;
+  vcPets=vcPets.filter(p=>{
+    const el=document.getElementById(p.id);
+    if(!el)return false;
+    if(p.handled){
+      if(!el.parentNode)return false;
+      return true;
+    }
+    p.x-=p.speed;
+    el.style.right=(scene.offsetWidth-p.x)+'px';
+    // Pet exits on left side
+    if(p.x<-120){
+      if(p.sick){
+        // sick pet left untreated - penalty
+        vcMoney-=20;
+        vcMistakes++;
+        vcShowPopup(scene,20,60,'-$20','#c44a3a');
+        vcShowFeedback('<strong>A pet with '+p.condition.name+' left untreated. -$20.</strong> Disease can spread to other pets and humans.','bad');
+        vcUpdateHUD();
+      }
+      el.remove();
+      return false;
+    }
+    return true;
+  });
+}
+
+function vcClickPet(id){
+  const p=vcPets.find(x=>x.id===id);
+  if(!p||p.handled)return;
+  p.handled=true;
+  const el=document.getElementById(id);
+  if(!el)return;
+  const scene=document.getElementById('vc-scene');
+  const rect=el.getBoundingClientRect();
+  const sceneRect=scene.getBoundingClientRect();
+  const px=rect.left-sceneRect.left+rect.width/2;
+  const py=rect.top-sceneRect.top;
+
+  if(p.sick){
+    // Correct - treat it
+    vcMoney+=50;
+    vcTreated++;
+    el.style.transition='all .5s';
+    el.style.transform='scale(1.2)';
+    el.style.filter='drop-shadow(0 0 10px #63a46c) brightness(1.3)';
+    vcShowPopup(scene,px,py,'+$50','#63a46c');
+    vcShowFeedback('<strong>'+p.condition.name+' treated. +$50.</strong> '+p.condition.why,'good');
+    setTimeout(()=>el.remove(),500);
+  } else {
+    // Wrong - healthy pet
+    vcMoney-=30;
+    vcMistakes++;
+    el.style.transition='all .3s';
+    el.style.transform='translateX(-8px)';
+    setTimeout(()=>el.style.transform='translateX(8px)',100);
+    setTimeout(()=>el.style.transform='',200);
+    vcShowPopup(scene,px,py,'-$30','#c44a3a');
+    vcShowFeedback('<strong>'+p.condition.name+' does not need treatment. -$30.</strong> '+p.condition.why,'bad');
+    // Let the healthy pet keep walking
+    p.handled=false;
+  }
+  vcUpdateHUD();
+}
+
+function vcShowPopup(scene,x,y,text,color){
+  const p=document.createElement('div');
+  p.className='vc-popup';
+  p.textContent=text;
+  p.style.cssText='position:absolute;left:'+x+'px;top:'+y+'px;transform:translateX(-50%);font-family:Fraunces,serif;font-weight:800;font-size:1.4rem;color:'+color+';text-shadow:0 2px 4px rgba(0,0,0,.3);pointer-events:none;z-index:10;animation:vc-rise 1.2s ease-out forwards';
+  scene.appendChild(p);
+  setTimeout(()=>p.remove(),1200);
+}
+
+function vcShowFeedback(msg,type){
+  const fb=document.getElementById('vc-feedback');
+  fb.style.display='block';
+  fb.style.background=type==='good'?'#d4e7c5':'#f5d4cc';
+  fb.style.color='#1e2420';
+  fb.style.borderLeft='4px solid '+(type==='good'?'#63a46c':'#c44a3a');
+  fb.innerHTML=msg;
+  clearTimeout(fb._t);
+  fb._t=setTimeout(()=>{fb.style.display='none';},4500);
+}
+
+function vcUpdateHUD(){
+  document.getElementById('vc-money').textContent='$'+vcMoney;
+  document.getElementById('vc-treated').textContent=vcTreated;
+  document.getElementById('vc-mistakes').textContent=vcMistakes;
+  document.getElementById('vc-time').textContent=vcTime;
+  document.getElementById('vc-money').style.color=vcMoney<0?'#c44a3a':'var(--rust)';
+}
+
+function vcEnd(){
+  vcRunning=false;
+  clearInterval(vcTimer);
+  clearInterval(vcMoveTimer);
+  clearTimeout(vcSpawnTimer);
+  const btn=document.getElementById('vc-start-btn');
+  btn.textContent='Play Again';
+  btn.disabled=false;
+  let title,msg;
+  if(vcMoney>=1000){
+    title='Top Veterinarian!';
+    msg='You earned $'+vcMoney+' with '+vcTreated+' treatments. Badge earned!';
+    if(window.PawBadges)PawBadges.earn('clinic');
+  } else if(vcMoney>=500){
+    title='Great shift!';
+    msg='You earned $'+vcMoney+'. Reach $1,000 in a single shift to earn the badge.';
+  } else if(vcMoney>=100){
+    title='Not bad.';
+    msg='You earned $'+vcMoney+'. Focus on the red germ icons and avoid healthy pets. Try again!';
+  } else {
+    title='Rough shift.';
+    msg='You ended with $'+vcMoney+'. Remember: red germ = sick (treat), green heart = healthy (leave alone).';
+  }
+  vcShowFeedback(title+' '+msg, vcMoney>=500?'good':'bad');
+  // Clear remaining pets
+  document.querySelectorAll('.vc-pet').forEach(el=>el.remove());
+  vcPets=[];
+}
+
+// Inject keyframes for popup animation
+(function(){
+  const s=document.createElement('style');
+  s.textContent='@keyframes vc-rise{0%{opacity:0;transform:translate(-50%,0)}20%{opacity:1}100%{opacity:0;transform:translate(-50%,-40px)}}';
+  document.head.appendChild(s);
+})();
 
 /* init hazard and flash when tab shown first time */
 document.querySelectorAll('.gtab').forEach(t=>{
