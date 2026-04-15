@@ -34,7 +34,7 @@ h1 em{font-style:italic;color:var(--rust)}
 .btn{display:inline-flex;align-items:center;gap:.6rem;padding:1rem 1.8rem;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:500;border-radius:50px;font-size:.9rem;transition:transform .2s}
 .btn:hover{transform:translateY(-2px)}
 .btn.alt{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
-.pdf-frame{width:100%;height:85vh;min-height:600px;border:1.5px solid rgba(0,0,0,.15);border-radius:16px;background:var(--paper);box-shadow:0 4px 20px rgba(0,0,0,.08)}
+.pdf-frame{width:100%;height:85vh;min-height:600px;border:1.5px solid rgba(0,0,0,.15);border-radius:16px;background:var(--paper);box-shadow:0 4px 20px rgba(0,0,0,.08);view-transition-name:pdf-viewer}
 .note{margin-top:1.5rem;padding:1rem 1.3rem;background:var(--paper);border-left:3px solid var(--rust);border-radius:8px;font-size:.85rem;color:#666}
 
 html.dark{--cream:#1e2420;--ink:#f1e9da;--paper:#2a3025;--moss:#8bb088}
@@ -205,19 +205,6 @@ body{-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:hidden}
   .hero{max-width:1400px}
 }
 
-/* === PAGE TRANSITIONS (View Transitions API) === */
-@view-transition{navigation:auto}
-::view-transition-old(root){animation:vt-slide-out .35s cubic-bezier(.4,0,.2,1) both}
-::view-transition-new(root){animation:vt-slide-in .35s cubic-bezier(.4,0,.2,1) both}
-@keyframes vt-slide-out{to{opacity:0;transform:translateX(-30px)}}
-@keyframes vt-slide-in{from{opacity:0;transform:translateX(30px)}}
-/* Keep nav still during transition - assign it a view-transition-name */
-nav{view-transition-name:site-nav}
-::view-transition-old(site-nav),::view-transition-new(site-nav){animation:none;mix-blend-mode:normal}
-@media (prefers-reduced-motion:reduce){
-  ::view-transition-old(root),::view-transition-new(root){animation:none}
-}
-
 
 /* === PAGE TRANSITIONS === */
 html{background:var(--cream)}
@@ -244,6 +231,8 @@ html.dark{background:#1e2420}
 @keyframes vt-blur-in{from{opacity:0;filter:blur(8px)}}
 nav{view-transition-name:site-nav}
 ::view-transition-old(site-nav),::view-transition-new(site-nav){animation:none;mix-blend-mode:normal}
+::view-transition-old(pdf-viewer){animation:vt-fade-out .15s ease both;background:var(--paper)}
+::view-transition-new(pdf-viewer){animation:vt-fade-in .15s ease .25s both;background:var(--paper)}
 @media (prefers-reduced-motion:reduce){
   ::view-transition-old(root),::view-transition-new(root){animation:none}
 }
