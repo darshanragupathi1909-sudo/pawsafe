@@ -16,7 +16,7 @@
 <style>
 :root{--cream:#f1e9da;--ink:#2a3025;--rust:#63a46c;--moss:#45503b;--ochre:#d4a040;--paper:#f7f1e3}
 *{margin:0;padding:0;box-sizing:border-box}
-html{scrollbar-gutter:stable}body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;min-height:100vh;display:flex;flex-direction:column}
+html{scrollbar-gutter:stable}body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
 h1,h2{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-.02em}
 nav{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 2.5rem;flex-wrap:nowrap;border-bottom:1px solid rgba(26,26,26,.15);background:var(--paper);position:sticky;top:0;z-index:100}
 .logo{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:800}
@@ -207,6 +207,20 @@ body{-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:hidden}
 /* Large screens: comfy content width cap */
 @media (min-width:1400px){
   .hero{max-width:1400px}
+}
+
+
+/* === PAGE TRANSITIONS (View Transitions API) === */
+@view-transition{navigation:auto}
+::view-transition-old(root){animation:vt-slide-out .35s cubic-bezier(.4,0,.2,1) both}
+::view-transition-new(root){animation:vt-slide-in .35s cubic-bezier(.4,0,.2,1) both}
+@keyframes vt-slide-out{to{opacity:0;transform:translateX(-30px)}}
+@keyframes vt-slide-in{from{opacity:0;transform:translateX(30px)}}
+/* Keep nav still during transition - assign it a view-transition-name */
+nav{view-transition-name:site-nav}
+::view-transition-old(site-nav),::view-transition-new(site-nav){animation:none;mix-blend-mode:normal}
+@media (prefers-reduced-motion:reduce){
+  ::view-transition-old(root),::view-transition-new(root){animation:none}
 }
 
 </style>
