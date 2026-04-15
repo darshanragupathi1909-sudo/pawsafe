@@ -48,7 +48,6 @@ h1 em{font-style:italic;color:var(--rust)}
 footer{background:var(--ink);color:var(--paper);padding:3rem 2rem;text-align:center;margin-top:4rem}
 footer p{opacity:.7;font-size:.85rem}
 
-
 html.dark{--cream:#1e2420;--ink:#f1e9da;--paper:#2a3025;--moss:#8bb088}
 html.dark body{background:var(--cream);color:var(--ink)}
 html.dark nav{background:#252b24;border-bottom-color:rgba(255,255,255,.1)}
@@ -68,7 +67,6 @@ html.dark .rules li,html.dark .intro{color:#b5b0a0}
 .paw-reveal.in{opacity:1;transform:translateY(0)}
 .rules,.signin-note,.giscus-wrap{transition:transform .35s cubic-bezier(.2,.8,.3,1),box-shadow .35s ease,border-color .35s ease}
 html{scroll-behavior:smooth}
-
 
 h1,h2,h3,h4,p,a,li,.card,.face,.qtext,.statement,.rcard,.habit,.opt{overflow-wrap:break-word;word-wrap:break-word}
 /* === RESPONSIVE POLISH === */
@@ -168,7 +166,6 @@ body{-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:hidden}
   .hero{max-width:1400px}
 }
 
-
 /* === PAGE TRANSITIONS (View Transitions API) === */
 @view-transition{navigation:auto}
 ::view-transition-old(root){animation:vt-slide-out .35s cubic-bezier(.4,0,.2,1) both}
@@ -176,6 +173,36 @@ body{-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:hidden}
 @keyframes vt-slide-out{to{opacity:0;transform:translateX(-30px)}}
 @keyframes vt-slide-in{from{opacity:0;transform:translateX(30px)}}
 /* Keep nav still during transition - assign it a view-transition-name */
+nav{view-transition-name:site-nav}
+::view-transition-old(site-nav),::view-transition-new(site-nav){animation:none;mix-blend-mode:normal}
+@media (prefers-reduced-motion:reduce){
+  ::view-transition-old(root),::view-transition-new(root){animation:none}
+}
+
+
+/* === PAGE TRANSITIONS === */
+html{background:var(--cream)}
+html.dark{background:#1e2420}
+@view-transition{navigation:auto}
+::view-transition-old(root){animation:vt-fade-out .4s cubic-bezier(.4,0,.2,1) both}
+::view-transition-new(root){animation:vt-slide-up-in .4s cubic-bezier(.4,0,.2,1) both}
+@keyframes vt-slide-left{to{opacity:0;transform:translateX(-40px)}}
+@keyframes vt-slide-right{from{opacity:0;transform:translateX(40px)}}
+@keyframes vt-slide-right-out{to{opacity:0;transform:translateX(40px)}}
+@keyframes vt-slide-left-in{from{opacity:0;transform:translateX(-40px)}}
+@keyframes vt-slide-up-out{to{opacity:0;transform:translateY(-30px)}}
+@keyframes vt-slide-up-in{from{opacity:0;transform:translateY(30px)}}
+@keyframes vt-slide-down-out{to{opacity:0;transform:translateY(30px)}}
+@keyframes vt-slide-down-in{from{opacity:0;transform:translateY(-30px)}}
+@keyframes vt-fade-out{to{opacity:0}}
+@keyframes vt-fade-in{from{opacity:0}}
+@keyframes vt-fade-down-out{to{opacity:0;transform:translateY(20px)}}
+@keyframes vt-fade-up-in{from{opacity:0;transform:translateY(20px)}}
+@keyframes vt-fade-up-out{to{opacity:0;transform:translateY(-20px)}}
+@keyframes vt-zoom-out{to{opacity:0;transform:scale(.92)}}
+@keyframes vt-zoom-in{from{opacity:0;transform:scale(1.08)}}
+@keyframes vt-blur-out{to{opacity:0;filter:blur(8px)}}
+@keyframes vt-blur-in{from{opacity:0;filter:blur(8px)}}
 nav{view-transition-name:site-nav}
 ::view-transition-old(site-nav),::view-transition-new(site-nav){animation:none;mix-blend-mode:normal}
 @media (prefers-reduced-motion:reduce){
